@@ -104,4 +104,4 @@ out/
 ### VS Code ###
 .vscode/
 
-mysql-data
+mysql-data/data
