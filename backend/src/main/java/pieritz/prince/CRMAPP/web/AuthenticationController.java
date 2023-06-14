@@ -3,13 +3,14 @@ package pieritz.prince.CRMAPP.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pieritz.prince.CRMAPP.domain.User;
 import pieritz.prince.CRMAPP.dto.AuthenticationRequest;
 import pieritz.prince.CRMAPP.dto.AuthenticationResponse;
 import pieritz.prince.CRMAPP.dto.RegisterRequest;
-import pieritz.prince.CRMAPP.jwt.LogoutService;
 import pieritz.prince.CRMAPP.services.AuthenticationService;
 
 import java.io.IOException;
@@ -19,22 +20,36 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthenticationController {
-    private final AuthenticationService authenticationService;
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
-    private final LogoutService logoutService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
+            @RequestBody RegisterRequest request,
+            HttpServletRequest servletRequest
     ) {
-        return ResponseEntity.ok(authenticationService.register(request));
+        logger.info("Register request received. Body: {}", request);
+        logger.info("Remote Address: {}", servletRequest.getRemoteAddr());
+
+        ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(authenticationService.register(request));
+        logger.info("Register response: {}", response);
+
+        return response;
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
+            @RequestBody AuthenticationRequest request,
+            HttpServletRequest servletRequest
     ) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        logger.info("Authenticate request received. Body: {}", request);
+        logger.info("Remote Address: {}", servletRequest.getRemoteAddr());
+
+        ResponseEntity<AuthenticationResponse> response = ResponseEntity.ok(authenticationService.authenticate(request));
+        logger.info("Authenticate response: {}", response);
+
+        return response;
     }
 
     @PostMapping("/logout")
@@ -60,6 +75,4 @@ public class AuthenticationController {
     ) throws IOException {
         authenticationService.refreshToken(request, response);
     }
-
-
 }
