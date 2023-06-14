@@ -1,0 +1,27 @@
+# Verwende das offizielle Gradle-Image als Basis
+FROM gradle:latest as builder
+
+# Lege das Arbeitsverzeichnis fest
+WORKDIR /app
+
+# Kopiere die build.gradle-Datei und den Quellcode in das Arbeitsverzeichnis
+COPY build.gradle .
+COPY src/ ./src/
+
+# Führe den 'bootJar'-Task aus, um das Spring Boot JAR zu erstellen
+RUN gradle bootJar --no-daemon
+
+# Neues Image mit dem JAR erstellen
+FROM openjdk:latest
+
+# Lege das Arbeitsverzeichnis fest
+WORKDIR /app
+
+# Kopiere das JAR aus dem vorherigen Builder-Image in das Arbeitsverzeichnis
+COPY --from=builder /app/build/libs/*.jar ./app.jar
+
+# Exponiere den gewünschten Port (Standardmäßig 8080)
+EXPOSE 8080
+
+# Starte die Spring Boot-Anwendung
+CMD ["java", "-jar", "app.jar"]
