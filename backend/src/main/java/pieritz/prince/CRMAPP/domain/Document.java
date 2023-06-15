@@ -1,11 +1,19 @@
 package pieritz.prince.CRMAPP.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "documents")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +36,7 @@ public class Document {
     @Column(name = "dateigroesse")
     private long dateigroesse;
 
-    @Column(name = "pfad", length = 255)
+    @Column(name = "pfad", length = 250)
     private String pfad;
 
     @Column(name = "notizen", length = 1000)
@@ -42,6 +50,5 @@ public class Document {
     @Temporal(TemporalType.TIMESTAMP)
     private Date geaendertDatum;
 
-    // Getter und Setter
 }
 

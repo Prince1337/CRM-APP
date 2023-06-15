@@ -2,9 +2,17 @@ package pieritz.prince.CRMAPP.domain;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "einstellungen")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class Settings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
