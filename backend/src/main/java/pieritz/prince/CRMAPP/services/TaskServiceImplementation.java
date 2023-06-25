@@ -1,6 +1,9 @@
 package pieritz.prince.CRMAPP.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pieritz.prince.CRMAPP.domain.Task;
 import pieritz.prince.CRMAPP.dto.TaskRequest;
@@ -31,11 +34,12 @@ public class TaskServiceImplementation implements TaskService {
     }
 
     @Override
-    public List<TaskResponse> getAllTasks() {
-        List<Task> tasks = taskRepository.findAll();
-        return tasks.stream()
+    public Page<TaskResponse> getAllTasks(Pageable pageable) {
+        Page<Task> tasks = taskRepository.findAll(pageable);
+        List<TaskResponse> taskResponses = tasks.getContent().stream()
                 .map(this::toTaskResponse)
-                .collect(Collectors.toList());
+                .toList();
+        return new PageImpl<>(taskResponses, pageable, tasks.getTotalElements());
     }
 
     @Override

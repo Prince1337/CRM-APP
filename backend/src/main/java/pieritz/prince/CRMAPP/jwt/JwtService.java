@@ -34,14 +34,14 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
-        long jwtExpiration = 86400;
+        long jwtExpiration = 3600000;
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
     public String generateRefreshToken(
             UserDetails userDetails
     ) {
-        long refreshExpiration = 60480;
+        long refreshExpiration = 3600000;
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
 

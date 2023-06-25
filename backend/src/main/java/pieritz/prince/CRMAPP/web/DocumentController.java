@@ -3,6 +3,8 @@ package pieritz.prince.CRMAPP.web;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pieritz.prince.CRMAPP.dto.DocumentRequest;
@@ -36,9 +38,9 @@ public class DocumentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DocumentResponse>> getAllDocuments() {
+    public ResponseEntity<Page<DocumentResponse>> getAllDocuments(Pageable pageable) {
         logger.info("Received request to get all documents");
-        List<DocumentResponse> responses = documentService.getAllDocuments();
+        Page<DocumentResponse> responses = documentService.getAllDocuments(pageable);
         logger.info("Retrieved all documents: {}", responses);
         return ResponseEntity.ok(responses);
     }

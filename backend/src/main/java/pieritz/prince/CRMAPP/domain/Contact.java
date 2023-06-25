@@ -96,7 +96,7 @@ public class Contact {
     private List<Task> aufgaben;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "angebote")
+    @Column(name = "angeboten")
     @JoinColumn(name = "kontakt_id")
     private List<Offer> angebote;
 

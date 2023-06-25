@@ -1,6 +1,9 @@
 package pieritz.prince.CRMAPP.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pieritz.prince.CRMAPP.domain.Invoice;
@@ -35,11 +38,12 @@ public class OfferServiceImplementation implements OfferService {
     }
 
     @Override
-    public List<OfferResponse> getAllOffers() {
-        List<Offer> offers = offerRepository.findAll();
-        return offers.stream()
+    public Page<OfferResponse> getAllOffers(Pageable pageable) {
+        Page<Offer> offers = offerRepository.findAll(pageable);
+        List<OfferResponse> offerResponses = offers.getContent().stream()
                 .map(offerMapper::toOfferResponse)
                 .collect(Collectors.toList());
+        return new PageImpl<>(offerResponses, pageable, offers.getTotalElements());
     }
 
     @Override

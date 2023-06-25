@@ -1,12 +1,12 @@
 package pieritz.prince.CRMAPP.dto;
 
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import pieritz.prince.CRMAPP.domain.Product;
 
 @Component
+@NoArgsConstructor
 public class ProductMapper {
-    public ProductMapper() {
-    }
 
     public Product toProduct(ProductRequest request) {
         return Product.builder()
@@ -29,5 +29,14 @@ public class ProductMapper {
                 .status(product.getStatus())
                 .notizen(product.getNotizen())
                 .build();
+    }
+
+    public void updateProductFromRequest(ProductRequest request, Product product) {
+        product.setBezeichnung(request.getBezeichnung());
+        product.setNettopreis(request.getNettopreis());
+        product.setUmst(request.getUmst());
+        product.setGruppe(request.getGruppe());
+        product.setStatus(request.getStatus());
+        product.setNotizen(request.getNotizen());
     }
 }

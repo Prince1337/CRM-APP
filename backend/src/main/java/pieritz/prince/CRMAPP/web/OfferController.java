@@ -3,6 +3,8 @@ package pieritz.prince.CRMAPP.web;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pieritz.prince.CRMAPP.dto.OfferRequest;
@@ -36,9 +38,9 @@ public class OfferController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OfferResponse>> getAllOffers() {
+    public ResponseEntity<Page<OfferResponse>> getAllOffers(Pageable pageable) {
         logger.info("Received request to get all offers");
-        List<OfferResponse> responses = offerService.getAllOffers();
+        Page<OfferResponse> responses = offerService.getAllOffers(pageable);
         logger.info("Offers retrieved successfully");
         return ResponseEntity.ok(responses);
     }

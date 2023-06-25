@@ -3,6 +3,8 @@ package pieritz.prince.CRMAPP.web;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pieritz.prince.CRMAPP.dto.TaskRequest;
@@ -36,9 +38,9 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TaskResponse>> getAllTasks() {
+    public ResponseEntity<Page<TaskResponse>> getAllTasks(Pageable pageable) {
         logger.info("Received request to get all tasks");
-        List<TaskResponse> responses = taskService.getAllTasks();
+        Page<TaskResponse> responses = taskService.getAllTasks(pageable);
         logger.info("Retrieved all tasks: {}", responses);
         return ResponseEntity.ok(responses);
     }

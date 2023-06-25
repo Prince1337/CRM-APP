@@ -2,6 +2,9 @@ package pieritz.prince.CRMAPP.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pieritz.prince.CRMAPP.domain.Document;
 import pieritz.prince.CRMAPP.dto.DocumentMapper;
@@ -36,11 +39,13 @@ public class DocumentServiceImplementation implements DocumentService {
     }
 
     @Override
-    public List<DocumentResponse> getAllDocuments() {
-        List<Document> documents = documentRepository.findAll();
-        return documents.stream()
+    public Page<DocumentResponse> getAllDocuments(Pageable pageable) {
+        Page<Document> documentPage = documentRepository.findAll(pageable);
+        List<DocumentResponse> documentResponses = documentPage.getContent()
+                .stream()
                 .map(documentMapper::toDocumentResponse)
-                .collect(Collectors.toList());
+                .toList();
+        return new PageImpl<>(documentResponses, pageable, documentPage.getTotalElements());
     }
 
     @Override

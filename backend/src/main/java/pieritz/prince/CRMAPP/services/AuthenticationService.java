@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pieritz.prince.CRMAPP.domain.Role;
 import pieritz.prince.CRMAPP.domain.User;
 import pieritz.prince.CRMAPP.dto.*;
 import pieritz.prince.CRMAPP.jwt.JwtService;
@@ -95,6 +95,7 @@ public class AuthenticationService {
         return entityToResponse(existingUser);
     }
 
+    @Cacheable(value = "user")
     public RoleResponse getRole(Authentication authentication) {
         var username = authentication.getName();
         var user = userDetailsServiceImplementation.loadUserByUsername(username);
