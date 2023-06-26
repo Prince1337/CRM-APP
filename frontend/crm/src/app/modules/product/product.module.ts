@@ -7,8 +7,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
-
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,8 @@ import { ProductService } from './services/product.service';
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [
     ProductService

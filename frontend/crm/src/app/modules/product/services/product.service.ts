@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ProductRequest } from 'src/app/shared/models/product-request';
 import { ProductResponse } from 'src/app/shared/models/product-response';
+import { Page } from 'src/app/shared/models/page';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +23,12 @@ export class ProductService {
     return this.http.get<ProductResponse>(`${this.apiUrl}/${id}`, { headers });
   }
 
-  getAllProducts(): Observable<ProductResponse[]> {
+  getAllProducts(page: number, size: number): Observable<Page<ProductResponse>> {
     const headers = this.createHeadersWithJwtToken();
-    return this.http.get<GetResponseProducts>(this.apiUrl, { headers }).pipe(
-      map(response => response.content)
-    );;
+    const params = new HttpParams()
+      .set('page', String(page))
+      .set('size', String(size));
+    return this.http.get<Page<ProductResponse>>(this.apiUrl, { headers, params });
   }
 
   updateProduct(id: number, request: ProductRequest): Observable<ProductResponse> {
@@ -44,8 +46,4 @@ export class ProductService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return headers;
   }
-}
-
-interface GetResponseProducts {
-	content: ProductResponse[];
 }

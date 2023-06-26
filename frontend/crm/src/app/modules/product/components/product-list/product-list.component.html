@@ -1,12 +1,33 @@
-<h1>Product List</h1>
+<div class="product-list">
+  <h1>Product List</h1>
 
-<div *ngIf="products">
-  <ul>
-    <li *ngFor="let product of products">
-      {{ product.bezeichnung }}
-    </li>
-  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <!-- Weitere Spalten für die anderen Produktattribute -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.bezeichnung }}</td>
+        <td>{{ product.nettopreis }}</td>
+        <!-- Weitere Spalten für die anderen Produktattribute -->
+      </tr>
+    </tbody>
+  </table>
+
+  <mat-paginator
+    [pageIndex]="currentPage"
+    [pageSize]="pageSize"
+    [length]="totalElements"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
 </div>
+
 
 <div *ngIf="!products">
   <p>Loading products...</p>

@@ -13,6 +13,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { HeaderComponent } from './shared/components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthenticationRoutingModule } from './modules/authentication/components/authentication-routing.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ReactiveFormsModule,
     ProductRoutingModule,
+    AuthenticationRoutingModule,
     ProductModule,
     MatIconModule,
     BrowserAnimationsModule
