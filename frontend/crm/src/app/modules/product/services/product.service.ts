@@ -41,9 +41,63 @@ export class ProductService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
 
+  getTotalProductCount(): Observable<number> {
+    const headers = this.createHeadersWithJwtToken();
+    return this.http.get<number>(`${this.apiUrl}/total-count`, { headers });
+  }
+
+  getAverageNetPrice(): Observable<number> {
+    const headers = this.createHeadersWithJwtToken();
+    return this.http.get<number>(`${this.apiUrl}/average-net-price`, { headers });
+  }
+
+  getProductCountByGroup(): Observable<Map<string, number>> {
+    const headers = this.createHeadersWithJwtToken();
+    return this.http.get<Map<string, number>>(`${this.apiUrl}/count-by-group`, { headers });
+  }
+
+  getProductCountByStatus(status: string): Observable<number> {
+    const headers = this.createHeadersWithJwtToken();
+    return this.http.get<number>(`${this.apiUrl}/count-by-status?status=${status}`, { headers });
+  }
+
+  getAverageTaxRate(): Observable<number> {
+    const headers = this.createHeadersWithJwtToken();
+    return this.http.get<number>(`${this.apiUrl}/average-tax-rate`, { headers });
+  }
+
+  searchProducts(
+    bezeichnung?: string,
+    gruppe?: string,
+    status?: string,
+    notizen?: string,
+    pageable?: { page: number; size: number }
+  ): Observable<Page<ProductResponse>> {
+    const headers = this.createHeadersWithJwtToken();
+    let params = new HttpParams();
+    
+    if (bezeichnung) {
+      params = params.set('bezeichnung', bezeichnung);
+    }
+    if (gruppe) {
+      params = params.set('gruppe', gruppe);
+    }
+    if (status) {
+      params = params.set('status', status);
+    }
+    if (notizen) {
+      params = params.set('notizen', notizen);
+    }
+    if (pageable) {
+      params = params.set('page', pageable.page.toString());
+      params = params.set('size', pageable.size.toString());
+    }
+
+    return this.http.get<Page<ProductResponse>>(`${this.apiUrl}/search`, { headers, params });
+  }
+
   private createHeadersWithJwtToken(): HttpHeaders {
-    const token = localStorage.getItem('access_token'); // Hole den JWT-Token aus dem Local Storage (angepasst an deine Implementierung)
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return headers;
+    const token = localStorage.getItem('access_token'); // Replace with your actual JWT token
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 }

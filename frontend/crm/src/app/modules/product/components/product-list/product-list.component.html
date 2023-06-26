@@ -1,5 +1,10 @@
 <div class="product-list">
   <h1>Product List</h1>
+  <button (click)="goToProductCreate()">Create Product</button>
+  <button (click)="goToReports()">Show Reports</button>
+  <button (click)="goToSearch()">Search Products</button>
+
+
 
   <table>
     <thead>
@@ -11,11 +16,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products">
-        <td>{{ product.id }}</td>
+      <tr *ngFor="let product of products"[routerLink]="['/products', product.id]">
         <td>{{ product.bezeichnung }}</td>
         <td>{{ product.nettopreis }}</td>
-        <!-- Weitere Spalten für die anderen Produktattribute -->
+        <td>{{ product.umst }}</td>
+        <td>{{ product.gruppe }}</td>
+        <td>{{ product.status }}</td>
+        <td>{{ product.notizen }}</td>
       </tr>
     </tbody>
   </table>

@@ -14,7 +14,10 @@ import pieritz.prince.CRMAPP.exceptions.ProductNotFoundException;
 import pieritz.prince.CRMAPP.repositories.ProductRepository;
 import pieritz.prince.CRMAPP.services.interfaces.ProductService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -65,108 +68,40 @@ public class ProductServiceImplementation implements ProductService {
         productRepository.delete(product);
     }
 
-    @Override
-    public Page<ProductResponse> findByGruppe(String gruppe, Pageable pageable) {
-        Page<Product> products = productRepository.findByGruppe(gruppe, pageable);
-        List<ProductResponse> productResponses = products.getContent().stream()
-                .map(productMapper::toProductResponse)
-                .toList();
-        return new PageImpl<>(productResponses, pageable, products.getTotalElements());
+    public long getTotalProductCount() {
+        return productRepository.count();
     }
 
-    @Override
-    public Page<ProductResponse> findByStatus(String status, Pageable pageable) {
-        return null;
+    public double getAverageNetPrice() {
+        return productRepository.getAverageNetPrice();
     }
 
-    @Override
-    public Page<ProductResponse> findByNettopreisLessThan(double nettopreis, Pageable pageable) {
-        return null;
+    public Map<String, Long> getProductCountByGroup() {
+        List<Object[]> results = productRepository.getProductCountByGroup();
+        Map<String, Long> countByGroup = new HashMap<>();
+
+        for (Object[] result : results) {
+            String group = (String) result[0];
+            long count = (long) result[1];
+            countByGroup.put(group, count);
+        }
+
+        return countByGroup;
     }
 
-    @Override
-    public Page<ProductResponse> findByBezeichnungContainingIgnoreCase(String keyword, Pageable pageable) {
-        return null;
+    public long getProductCountByStatus(String status) {
+        return productRepository.countByStatus(status);
     }
 
-    @Override
-    public Page<ProductResponse> findByGruppeAndStatus(String gruppe, String status, Pageable pageable) {
-        return null;
+    public double getAverageTaxRate() {
+        return productRepository.getAverageTaxRate();
     }
 
-    @Override
-    public Page<ProductResponse> findByNettopreisBetween(double minNettopreis, double maxNettopreis, Pageable pageable) {
-        return null;
-    }
 
     @Override
-    public Page<ProductResponse> findByGruppeOrderByBezeichnungAsc(String gruppe, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByStatusOrderByNettopreisDesc(String status, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findTop5ByOrderByNettopreisDesc(Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findDistinctByGruppe(String gruppe, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByBezeichnungLike(String pattern, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByBezeichnungStartingWith(String prefix, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByNotizenIsNull(Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByNotizenIsNotNull(Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByBezeichnungIn(List<String> bezeichnungen, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByStatusNot(String status, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByGruppeIgnoreCase(String gruppe, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByNettopreisGreaterThanEqual(double nettopreis, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByBezeichnungIgnoreCaseAndStatus(String bezeichnung, String status, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ProductResponse> findByGruppeAndNettopreisLessThanEqual(String gruppe, double nettopreis, Pageable pageable) {
-        return null;
+    public Page<ProductResponse> searchProducts(String bezeichnung, String gruppe, String status, String notizen, Pageable pageable) {
+        Page<Product> products = productRepository.findByBezeichnungContainingOrGruppeContainingOrStatusContainingOrNotizenContaining(bezeichnung, gruppe, status, notizen, pageable);
+        return products.map(productMapper::toProductResponse);
     }
 
 

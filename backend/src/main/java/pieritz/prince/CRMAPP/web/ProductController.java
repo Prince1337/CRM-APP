@@ -8,12 +8,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pieritz.prince.CRMAPP.domain.Product;
 import pieritz.prince.CRMAPP.dto.ProductRequest;
 import pieritz.prince.CRMAPP.dto.ProductResponse;
 import pieritz.prince.CRMAPP.exceptions.ProductNotFoundException;
 import pieritz.prince.CRMAPP.services.interfaces.ProductService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
@@ -79,5 +81,46 @@ public class ProductController {
         productService.deleteProduct(id);
         logger.info("Product deleted successfully");
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/total-count")
+    public ResponseEntity<Long> getTotalProductCount() {
+        long totalCount = productService.getTotalProductCount();
+        return ResponseEntity.ok(totalCount);
+    }
+
+    @GetMapping("/average-net-price")
+    public ResponseEntity<Double> getAverageNetPrice() {
+        double averageNetPrice = productService.getAverageNetPrice();
+        System.out.println("test");
+        return ResponseEntity.ok(averageNetPrice);
+    }
+
+    @GetMapping("/count-by-group")
+    public ResponseEntity<Map<String, Long>> getProductCountByGroup() {
+        Map<String, Long> countByGroup = productService.getProductCountByGroup();
+        return ResponseEntity.ok(countByGroup);
+    }
+
+    @GetMapping("/count-by-status")
+    public ResponseEntity<Long> getProductCountByStatus(@RequestParam("status") String status) {
+        long count = productService.getProductCountByStatus(status);
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/average-tax-rate")
+    public ResponseEntity<Double> getAverageTaxRate() {
+        double averageTaxRate = productService.getAverageTaxRate();
+        return ResponseEntity.ok(averageTaxRate);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<ProductResponse>> searchProducts(@RequestParam(required = false) String bezeichnung,
+                                                                @RequestParam(required = false) String gruppe,
+                                                                @RequestParam(required = false) String status,
+                                                                @RequestParam(required = false) String notizen,
+                                                                Pageable pageable) {
+        Page<ProductResponse> responses = productService.searchProducts(bezeichnung, gruppe, status, notizen, pageable);
+        return ResponseEntity.ok(responses);
     }
 }

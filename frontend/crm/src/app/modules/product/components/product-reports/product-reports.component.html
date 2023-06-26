@@ -1,1 +1,17 @@
-<p>product-reports works!</p>
+<div>
+    <h2>Product Report</h2>
+    <p>Total Product Count: {{ totalProductCount }}</p>
+    <p>Average Net Price: {{ averageNetPrice }}</p>
+    
+    <h3>Product Count by Group:</h3>
+    <ul>
+      <li *ngFor="let item of productCountByGroup | keyvalue">
+        {{ item.key }}: {{ item.value }}
+      </li>
+    </ul>
+  
+    <p>Product Count by "ausverkauft": {{ productCountByStatus1 }}</p>
+    <p>Product Count by "auf Lager": {{ productCountByStatus2 }}</p>
+    <p>Average Tax Rate: {{ averageTaxRate }}</p>
+  </div>
+  

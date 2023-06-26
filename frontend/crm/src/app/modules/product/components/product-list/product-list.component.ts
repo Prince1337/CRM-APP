@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductResponse } from 'src/app/shared/models/product-response';
 import { ProductService } from '../../services/product.service';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ProductListComponent implements OnInit {
   pageSize!: number;
   totalElements!: number;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -42,4 +43,18 @@ export class ProductListComponent implements OnInit {
     const size = event.pageSize;
     this.getAllProducts(page, size);
   }
+
+  goToProductCreate() {
+    this.router.navigate(['/products/create']);
+  }
+
+  goToReports() {
+    this.router.navigate(['/products/reports']);
+  }
+
+  goToSearch() {
+    this.router.navigate(['/products/search']);
+  }
+
+  
 }

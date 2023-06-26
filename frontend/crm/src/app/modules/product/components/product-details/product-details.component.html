@@ -1,1 +1,9 @@
-<p>product-details works!</p>
+<div *ngIf="product">
+  <h2>{{ product.bezeichnung }}</h2>
+  <p>Nettopreis: {{ product.nettopreis }}</p>
+  <p>Umsatzsteuer: {{ product.umst }}</p>
+  <p>Gruppe: {{ product.gruppe }}</p>
+  <p>Status: {{ product.status }}</p>
+  <p>Notizen: {{ product.notizen }}</p>
+  <button (click)="goToEdit()">Edit Product</button>
+</div>

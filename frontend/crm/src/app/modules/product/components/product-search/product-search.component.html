@@ -1,1 +1,53 @@
-<p>product-search works!</p>
+<div>
+    <h2>Product Search</h2>
+    <div>
+      <label for="bezeichnung">Bezeichnung:</label>
+      <input type="text" id="bezeichnung" [(ngModel)]="searchParams.bezeichnung" />
+    </div>
+    <div>
+      <label for="gruppe">Gruppe:</label>
+      <input type="text" id="gruppe" [(ngModel)]="searchParams.gruppe" />
+    </div>
+    <div>
+      <label for="status">Status:</label>
+      <input type="text" id="status" [(ngModel)]="searchParams.status" />
+    </div>
+    <div>
+      <label for="notizen">Notizen:</label>
+      <input type="text" id="notizen" [(ngModel)]="searchParams.notizen" />
+    </div>
+    <button (click)="searchProducts()">Search</button>
+    <div class="product-list" *ngIf="products$ | async as products">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Bezeichnung</th>
+            <th>Nettopreis</th>
+            <th>Umsatzsteuer</th>
+            <th>Gruppe</th>
+            <th>Status</th>
+            <th>Notizen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products.content">
+            <td>{{ product.id }}</td>
+            <td>{{ product.bezeichnung }}</td>
+            <td>{{ product.nettopreis }}</td>
+            <td>{{ product.umst }}</td>
+            <td>{{ product.gruppe }}</td>
+            <td>{{ product.status }}</td>
+            <td>{{ product.notizen }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <button [disabled]="products.first" (click)="goToPage(0)">First</button>
+        <button [disabled]="products.first" (click)="goToPage(products.number - 1)">Previous</button>
+        <button [disabled]="products.last" (click)="goToPage(products.number + 1)">Next</button>
+        <button [disabled]="products.last" (click)="goToPage(products.totalPages - 1)">Last</button>
+      </div>
+    </div>
+  </div>
+  
