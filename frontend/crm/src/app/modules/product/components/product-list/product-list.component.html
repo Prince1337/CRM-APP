@@ -1,0 +1,13 @@
+<h1>Product List</h1>
+
+<div *ngIf="products">
+  <ul>
+    <li *ngFor="let product of products">
+      {{ product.bezeichnung }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="!products">
+  <p>Loading products...</p>
+</div>

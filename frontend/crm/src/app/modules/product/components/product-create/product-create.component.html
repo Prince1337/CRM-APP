@@ -1,0 +1,25 @@
+<div>
+    <h2>Create Product</h2>
+    <form (ngSubmit)="createProduct()">
+      <div>
+        <label for="bezeichnung">Bezeichnung:</label>
+        <input type="text" id="bezeichnung" [(ngModel)]="product.bezeichnung" name="bezeichnung" required>
+      </div>
+      <div>
+        <label for="nettopreis">Nettopreis:</label>
+        <input type="number" id="nettopreis" [(ngModel)]="product.nettopreis" name="nettopreis" required>
+      </div>
+      <div>
+        <label for="umst">Umsatzsteuer:</label>
+        <input type="number" id="umst" [(ngModel)]="product.umst" name="umst" required>
+      </div>
+      <div>
+        <label for="gruppe">Gruppe:</label>
+        <input type="text" id="gruppe" [(ngModel)]="product.gruppe" name="gruppe" required>
+      </div>
+      <div>
+        <button type="submit">Create</button>
+      </div>
+    </form>
+  </div>
+  
