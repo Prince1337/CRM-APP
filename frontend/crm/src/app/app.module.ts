@@ -11,6 +11,9 @@ import { ProductRoutingModule } from './modules/product/product-routing.module';
 import { ProductModule } from './modules/product/product.module';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { HeaderComponent } from './shared/components/header/header.component';
     HttpClientModule,
     ReactiveFormsModule,
     ProductRoutingModule,
-    ProductModule
+    ProductModule,
+    MatIconModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
