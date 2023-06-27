@@ -13,4 +13,7 @@ public interface DocumentService {
     Page<DocumentResponse> getAllDocuments(Pageable pageable);
     DocumentResponse updateDocument(Long id, DocumentRequest request);
     void deleteDocument(Long id);
+    Page<DocumentResponse> getDocumentsByContactId(Long contactId, Pageable pageable);
+    long countByType(String type);
+    Page<DocumentResponse> getDocumentsByFileType(String fileType, Pageable pageable);
 }

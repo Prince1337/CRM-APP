@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { AuthenticationRequest } from 'src/app/shared/models/authentication-request';
 import { AuthenticationResponse } from 'src/app/shared/models/authentication-response';
@@ -12,7 +13,7 @@ export class LoginComponent {
   username!: string;
   password!: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   login() {
     const request: AuthenticationRequest = {
@@ -26,10 +27,12 @@ export class LoginComponent {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('refresh_token', response.refresh_token);
         console.log('Logged in', response);
+        this.router.navigate(['/products']);
       },
       (error) => {
         // Handle login error
         console.error('Login failed', error.message);
+        alert('Login failed');
       }
     );
   }

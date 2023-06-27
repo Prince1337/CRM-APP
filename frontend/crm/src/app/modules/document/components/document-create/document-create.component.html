@@ -1,0 +1,19 @@
+<h2>Create Document</h2>
+
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="art">Art:</label>
+    <input type="text" id="art" [(ngModel)]="document.art" name="art" required>
+  </div>
+  <div>
+    <label for="kontaktId">Kontakt ID:</label>
+    <input type="number" id="kontaktId" [(ngModel)]="document.kontaktId" name="kontaktId" required>
+  </div>
+  <div>
+    <label for="speicherdatum">Speicherdatum:</label>
+    <input type="date" id="speicherdatum" [(ngModel)]="document.speicherdatum" name="speicherdatum" required>
+  </div>
+  <!-- Add more form fields for other properties -->
+  
+  <button type="submit">Create</button>
+</form>

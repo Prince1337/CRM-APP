@@ -13,4 +13,8 @@ public interface OfferService {
     Page<OfferResponse> getAllOffers(Pageable pageable);
     OfferResponse updateOffer(Long id, OfferRequest request);
     void deleteOffer(Long id);
+    Page<OfferResponse> getOffersByContactId(Long contactId, Pageable pageable);
+    long countByStatus(String status);
+    Page<OfferResponse> getOffersByDescription(String description, Pageable pageable);
+
 }

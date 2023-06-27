@@ -60,4 +60,21 @@ public class TaskController {
         logger.info("Task deleted successfully");
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/byContact")
+    public ResponseEntity<Page<TaskResponse>> getTasksByContactId(@RequestParam Long contactId, Pageable pageable) {
+        Page<TaskResponse> responses = taskService.getTasksByContactId(contactId, pageable);
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/countByArt")
+    public long countTasksByArt(@RequestParam String art) {
+        return taskService.countByArt(art);
+    }
+
+    @GetMapping("/byDescription")
+    public ResponseEntity<Page<TaskResponse>> getTasksByDescription(@RequestParam String description, Pageable pageable) {
+        Page<TaskResponse> responses = taskService.getTasksByDescription(description, pageable);
+        return ResponseEntity.ok(responses);
+    }
 }

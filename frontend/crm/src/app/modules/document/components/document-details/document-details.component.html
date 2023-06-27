@@ -1,0 +1,14 @@
+<div *ngIf="document">
+    <h2>Document Details</h2>
+    <p><strong>ID:</strong> {{ document.id }}</p>
+    <p><strong>Art:</strong> {{ document.art }}</p>
+    <p><strong>Kontakt ID:</strong> {{ document.kontaktId }}</p>
+    <p><strong>Speicherdatum:</strong> {{ document.speicherdatum | date }}</p>
+    <p><strong>Dateityp:</strong> {{ document.dateityp }}</p>
+    <p><strong>Dateigröße:</strong> {{ document.dateigroesse }}</p>
+    <p><strong>Pfad:</strong> {{ document.pfad }}</p>
+    <p><strong>Notizen:</strong> {{ document.notizen }}</p>
+    <p><strong>Erstellt am:</strong> {{ document.erstelltDatum | date }}</p>
+    <p><strong>Geändert am:</strong> {{ document.geaendertDatum | date }}</p>
+  </div>
+  

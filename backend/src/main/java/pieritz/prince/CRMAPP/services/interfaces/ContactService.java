@@ -13,4 +13,8 @@ public interface ContactService {
     Page<ContactResponse> getAllContacts(Pageable pageable);
     ContactResponse updateContact(Long id, ContactRequest request);
     void deleteContact(Long id);
+    Page<ContactResponse> searchContacts(String searchTerm, Pageable pageable);
+    long countByCompany(String company);
+    long countByEmailContaining(String email);
+    Page<ContactResponse> getContactsByIndustry(String industry, Pageable pageable);
 }

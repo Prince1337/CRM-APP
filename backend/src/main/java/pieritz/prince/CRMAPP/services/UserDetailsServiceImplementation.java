@@ -13,6 +13,7 @@ import pieritz.prince.CRMAPP.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,17 +64,18 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
     }
 
     public UserResponse getUser(Long id) {
-        if (userRepository.findById(id).isPresent()) {
-            User user = userRepository.findById(id).get();
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+            User user = optional.get();
             return UserResponse.builder()
                     .id(user.getId())
                     .username(user.getUsername())
-                    .firstname(userRepository.findById(id).get().getFirstname())
-                    .lastname(userRepository.findById(id).get().getLastname())
+                    .firstname(optional.get().getFirstname())
+                    .lastname(optional.get().getLastname())
                     .roles(getUserRoles(user))
                     .build();
-        }
-        return new UserResponse();
     }
 
     private Set<String> getUserRoles(User user) {

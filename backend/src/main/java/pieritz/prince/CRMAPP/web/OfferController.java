@@ -60,4 +60,23 @@ public class OfferController {
         logger.info("Offer deleted successfully");
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/byContact")
+    public ResponseEntity<Page<OfferResponse>> getOffersByContactId(@RequestParam Long contactId, Pageable pageable) {
+        Page<OfferResponse> responses = offerService.getOffersByContactId(contactId, pageable);
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/countByStatus")
+    public long countOffersByStatus(@RequestParam String status) {
+        return offerService.countByStatus(status);
+    }
+
+
+
+    @GetMapping("/byDescription")
+    public ResponseEntity<Page<OfferResponse>> getOffersByDescription(@RequestParam String description, Pageable pageable) {
+        Page<OfferResponse> responses = offerService.getOffersByDescription(description, pageable);
+        return ResponseEntity.ok(responses);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pieritz.prince.CRMAPP.domain.Invoice;
 import pieritz.prince.CRMAPP.dto.*;
+import pieritz.prince.CRMAPP.exceptions.InvoiceNotFoundException;
 import pieritz.prince.CRMAPP.repositories.InvoiceRepository;
 import pieritz.prince.CRMAPP.services.interfaces.InvoiceService;
 
@@ -31,7 +32,7 @@ public class InvoiceServiceImplementation implements InvoiceService {
     @Override
     public InvoiceResponse getInvoiceById(Long id) {
         Invoice invoice = invoiceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Invoice not found"));
+                .orElseThrow(() -> new InvoiceNotFoundException("Invoice not found"));
         return invoiceMapper.toInvoiceResponse(invoice);
     }
 
@@ -47,7 +48,7 @@ public class InvoiceServiceImplementation implements InvoiceService {
     @Override
     public InvoiceResponse updateInvoice(Long id, InvoiceRequest request) {
         Invoice invoice = invoiceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Invoice not found"));
+                .orElseThrow(() -> new InvoiceNotFoundException("Invoice not found"));
 
         invoiceMapper.updateInvoiceFromRequest(request, invoice);
         invoice = invoiceRepository.save(invoice);
@@ -57,8 +58,27 @@ public class InvoiceServiceImplementation implements InvoiceService {
     @Override
     public void deleteInvoice(Long id) {
         Invoice invoice = invoiceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Invoice not found"));
+                .orElseThrow(() -> new InvoiceNotFoundException("Invoice not found"));
         invoiceRepository.delete(invoice);
+    }
+
+    @Override
+    public Page<InvoiceResponse> getInvoicesByContactId(Long contactId, Pageable pageable) {
+        Page<Invoice> invoices = invoiceRepository.findByKontaktId(contactId, pageable);
+        return invoices.map(invoiceMapper::toInvoiceResponse);
+    }
+
+    @Override
+    public long countByStatus(String status) {
+        return invoiceRepository.countByStatus(status);
+    }
+
+
+
+    @Override
+    public Page<InvoiceResponse> getInvoicesByDescription(String description, Pageable pageable) {
+        Page<Invoice> invoices = invoiceRepository.findByLeistungsbezeichnung(description, pageable);
+        return invoices.map(invoiceMapper::toInvoiceResponse);
     }
 
 }

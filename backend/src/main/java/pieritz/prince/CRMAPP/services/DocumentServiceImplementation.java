@@ -10,6 +10,7 @@ import pieritz.prince.CRMAPP.domain.Document;
 import pieritz.prince.CRMAPP.dto.DocumentMapper;
 import pieritz.prince.CRMAPP.dto.DocumentRequest;
 import pieritz.prince.CRMAPP.dto.DocumentResponse;
+import pieritz.prince.CRMAPP.exceptions.DocumentNotFoundException;
 import pieritz.prince.CRMAPP.repositories.DocumentRepository;
 import pieritz.prince.CRMAPP.services.interfaces.DocumentService;
 
@@ -34,7 +35,7 @@ public class DocumentServiceImplementation implements DocumentService {
     @Override
     public DocumentResponse getDocumentById(Long id) {
         Document document = documentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document not found"));
+                .orElseThrow(() -> new DocumentNotFoundException("Document not found"));
         return documentMapper.toDocumentResponse(document);
     }
 
@@ -51,7 +52,7 @@ public class DocumentServiceImplementation implements DocumentService {
     @Override
     public DocumentResponse updateDocument(Long id, DocumentRequest request) {
         Document document = documentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document not found"));
+                .orElseThrow(() -> new DocumentNotFoundException("Document not found"));
         documentMapper.updateDocumentFromRequest(request, document);
         Document updatedDocument = documentRepository.save(document);
         return documentMapper.toDocumentResponse(updatedDocument);
@@ -60,7 +61,24 @@ public class DocumentServiceImplementation implements DocumentService {
     @Override
     public void deleteDocument(Long id) {
         Document document = documentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document not found"));
+                .orElseThrow(() -> new DocumentNotFoundException("Document not found"));
         documentRepository.delete(document);
+    }
+
+    @Override
+    public Page<DocumentResponse> getDocumentsByContactId(Long contactId, Pageable pageable) {
+        Page<Document> documents = documentRepository.findByKontaktId(contactId, pageable);
+        return documents.map(documentMapper::toDocumentResponse);
+    }
+
+    @Override
+    public long countByType(String type) {
+        return documentRepository.countByArt(type);
+    }
+
+    @Override
+    public Page<DocumentResponse> getDocumentsByFileType(String fileType, Pageable pageable) {
+        Page<Document> documents = documentRepository.findByDateityp(fileType, pageable);
+        return documents.map(documentMapper::toDocumentResponse);
     }
 }

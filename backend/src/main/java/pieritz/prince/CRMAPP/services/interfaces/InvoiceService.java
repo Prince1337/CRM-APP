@@ -13,4 +13,8 @@ public interface InvoiceService {
     Page<InvoiceResponse> getAllInvoices(Pageable pageable);
     InvoiceResponse updateInvoice(Long id, InvoiceRequest request);
     void deleteInvoice(Long id);
+    Page<InvoiceResponse> getInvoicesByContactId(Long contactId, Pageable pageable);
+    long countByStatus(String status);
+    Page<InvoiceResponse> getInvoicesByDescription(String description, Pageable pageable);
+
 }

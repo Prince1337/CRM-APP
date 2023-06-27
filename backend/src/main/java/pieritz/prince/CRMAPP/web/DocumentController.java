@@ -60,4 +60,23 @@ public class DocumentController {
         logger.info("Document deleted successfully");
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/byContact")
+    public ResponseEntity<Page<DocumentResponse>> getDocumentsByContactId(@RequestParam Long contactId, Pageable pageable) {
+        Page<DocumentResponse> responses = documentService.getDocumentsByContactId(contactId, pageable);
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/countByType")
+    public long countDocumentsByType(@RequestParam String type) {
+        return documentService.countByType(type);
+    }
+
+
+
+    @GetMapping("/byFileType")
+    public ResponseEntity<Page<DocumentResponse>> getDocumentsByFileType(@RequestParam String fileType, Pageable pageable) {
+        Page<DocumentResponse> responses = documentService.getDocumentsByFileType(fileType, pageable);
+        return ResponseEntity.ok(responses);
+    }
 }

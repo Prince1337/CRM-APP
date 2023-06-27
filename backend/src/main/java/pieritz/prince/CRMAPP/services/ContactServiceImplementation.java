@@ -60,7 +60,7 @@ public class ContactServiceImplementation implements ContactService {
     @Override
     public ContactResponse updateContact(Long id, ContactRequest request) {
         Contact contact = contactRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contact not found with id: " + id));
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found with id: " + id));
         contactMapper.updateContactFromRequest(request, contact);
         Contact updatedContact = contactRepository.save(contact);
         return contactMapper.mapToContactResponse(updatedContact);
@@ -69,5 +69,29 @@ public class ContactServiceImplementation implements ContactService {
     @Override
     public void deleteContact(Long id) {
         contactRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<ContactResponse> searchContacts(String searchTerm, Pageable pageable) {
+        Page<Contact> contacts = contactRepository.findByVornameContainingIgnoreCaseOrNameContainingIgnoreCase(searchTerm, searchTerm, pageable);
+        return contacts.map(contactMapper::mapToContactResponse);
+    }
+
+    @Override
+    public long countByCompany(String company) {
+        return contactRepository.countByFirma(company);
+    }
+
+    @Override
+    public long countByEmailContaining(String email) {
+        return contactRepository.countByEmailContaining(email);
+    }
+
+
+
+    @Override
+    public Page<ContactResponse> getContactsByIndustry(String industry, Pageable pageable) {
+        Page<Contact> contacts = contactRepository.findByBranche(industry, pageable);
+        return contacts.map(contactMapper::mapToContactResponse);
     }
 }

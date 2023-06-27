@@ -27,35 +27,17 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<?> createProduct(@RequestBody ProductRequest request) {
-        try {
             ProductResponse response = productService.createProduct(request);
             logger.info("Product created successfully");
             return ResponseEntity.ok(response);
-        } catch (DataIntegrityViolationException ex) {
-            logger.info("Bad request, product not created");
-            return ResponseEntity.badRequest().header("X-Validation-Error", ex.getMessage())
-                .body(ex.getMessage());
-        } catch (Exception ex) {
-            logger.info("An error occurred while creating the product: ", ex);
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
-
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProduct(@PathVariable Long id) {
         logger.info("Received request to get product with ID: {}", id);
-        try {
             ProductResponse response = productService.getProductById(id);
             logger.info("Product retrieved successfully");
             return ResponseEntity.ok(response);
-        } catch (ProductNotFoundException ex) {
-            logger.error("Product not found", ex);
-            return ResponseEntity.status(404).body(ex.getMessage());
-        } catch (Exception ex) {
-            logger.info("An error occurred while creating the product", ex);
-            return ResponseEntity.badRequest().build();
-        }
 
     }
 

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pieritz.prince.CRMAPP.domain.Settings;
 import pieritz.prince.CRMAPP.dto.SettingsRequest;
 import pieritz.prince.CRMAPP.dto.SettingsResponse;
+import pieritz.prince.CRMAPP.exceptions.SettingsNotFoundException;
 import pieritz.prince.CRMAPP.repositories.SettingsRepository;
 import pieritz.prince.CRMAPP.services.interfaces.SettingsService;
 
@@ -18,14 +19,14 @@ public class SettingsServiceImplementation implements SettingsService {
     @Override
     public SettingsResponse getSettings() {
         Settings settings = settingsRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Settings not found"));
+                .orElseThrow(() -> new SettingsNotFoundException("Settings not found"));
         return toSettingsResponse(settings);
     }
 
     @Override
     public SettingsResponse updateSettings(SettingsRequest request) {
         Settings settings = settingsRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Settings not found"));
+                .orElseThrow(() -> new SettingsNotFoundException("Settings not found"));
 
         updateSettingsFromRequest(request, settings);
         settings = settingsRepository.save(settings);

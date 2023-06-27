@@ -13,4 +13,8 @@ public interface TaskService {
     Page<TaskResponse> getAllTasks(Pageable pageable);
     TaskResponse updateTask(Long id, TaskRequest request);
     void deleteTask(Long id);
+    Page<TaskResponse> getTasksByContactId(Long contactId, Pageable pageable);
+    long countByArt(String art);
+    Page<TaskResponse> getTasksByDescription(String description, Pageable pageable);
+
 }

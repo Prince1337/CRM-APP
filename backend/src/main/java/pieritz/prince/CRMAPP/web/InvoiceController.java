@@ -60,4 +60,21 @@ public class InvoiceController {
         logger.info("Invoice deleted successfully");
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/byContact")
+    public ResponseEntity<Page<InvoiceResponse>> getInvoicesByContactId(@RequestParam Long contactId, Pageable pageable) {
+        Page<InvoiceResponse> responses = invoiceService.getInvoicesByContactId(contactId, pageable);
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/countByStatus")
+    public long countInvoicesByStatus(@RequestParam String status) {
+        return invoiceService.countByStatus(status);
+    }
+
+    @GetMapping("/byDescription")
+    public ResponseEntity<Page<InvoiceResponse>> getInvoicesByDescription(@RequestParam String description, Pageable pageable) {
+        Page<InvoiceResponse> responses = invoiceService.getInvoicesByDescription(description, pageable);
+        return ResponseEntity.ok(responses);
+    }
 }

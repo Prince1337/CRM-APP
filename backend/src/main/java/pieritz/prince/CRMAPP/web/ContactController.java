@@ -66,4 +66,28 @@ public class ContactController {
         log.info("Deleted contact with ID: {}", id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<ContactResponse>> searchContacts(@RequestParam(required = false) String searchTerm, Pageable pageable) {
+        Page<ContactResponse> responses = contactService.searchContacts(searchTerm, pageable);
+        return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/countByCompany")
+    public long countContactsByCompany(@RequestParam String company) {
+        return contactService.countByCompany(company);
+    }
+
+    @GetMapping("/countByEmailContaining")
+    public long countContactsByEmailContaining(@RequestParam String email) {
+        return contactService.countByEmailContaining(email);
+    }
+
+
+
+    @GetMapping("/industry")
+    public ResponseEntity<Page<ContactResponse>> getContactsByIndustry(@RequestParam String industry, Pageable pageable) {
+        Page<ContactResponse> responses = contactService.getContactsByIndustry(industry, pageable);
+        return ResponseEntity.ok(responses);
+    }
 }
