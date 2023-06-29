@@ -1,0 +1,17 @@
+<h2>Invoice Details</h2>
+
+<div *ngIf="invoice">
+  <ul>
+    <li><strong>Invoice Number:</strong> {{ invoice.rechnungsnummer }}</li>
+    <li><strong>Contact ID:</strong> {{ invoice.kontaktId }}</li>
+    <li><strong>Invoice Date:</strong> {{ invoice.rechnungsdatum | date }}</li>
+    <li><strong>Total Amount:</strong> {{ invoice.bruttobetrag }}</li>
+    <li><strong>Description:</strong> {{ invoice.leistungsbezeichnung }}</li>
+    <li><strong>Status:</strong> {{ invoice.status }}</li>
+    <li><strong>Payment Deadline:</strong> {{ invoice.zahlungsfrist | date }}</li>
+  </ul>
+  <button (click)="goToEdit()">Edit Invoice</button>
+  <button (click)="deleteInvoice()">Delete Invoice</button>
+</div>
+
+<div *ngIf="!invoice">Loading invoice details...</div>

@@ -1,0 +1,32 @@
+<h1>Edit Invoice</h1>
+
+<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="kontaktId">Kontakt ID</label>
+    <input type="number" class="form-control" id="kontaktId" formControlName="kontaktId">
+  </div>
+  <div class="form-group">
+    <label for="rechnungsdatum">Rechnungsdatum</label>
+    <input type="date" class="form-control" id="rechnungsdatum" formControlName="rechnungsdatum">
+  </div>
+  <div class="form-group">
+    <label for="bruttobetrag">Bruttobetrag</label>
+    <input type="number" class="form-control" id="bruttobetrag" formControlName="bruttobetrag">
+  </div>
+  <div class="form-group">
+    <label for="leistungsbezeichnung">Leistungsbezeichnung</label>
+    <input type="text" class="form-control" id="leistungsbezeichnung" formControlName="leistungsbezeichnung">
+  </div>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <input type="text" class="form-control" id="status" formControlName="status">
+  </div>
+  <div class="form-group">
+    <label for="zahlungsfrist">Zahlungsfrist</label>
+    <input type="date" class="form-control" id="zahlungsfrist" formControlName="zahlungsfrist">
+  </div>
+
+  <!-- Weitere Felder für die Produkte -->
+
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

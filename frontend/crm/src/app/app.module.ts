@@ -11,9 +11,12 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthenticationRoutingModule } from './modules/authentication/components/authentication-routing.module';
-import { DocumentListComponent } from './modules/document/components/document-list/document-list.component';
 import { DocumentRoutingModule } from './modules/document/document-routing.module';
 import { DocumentModule } from './modules/document/document.module';
+import { ContactModule } from './modules/contact/contact.module';
+import { ContactRoutingModule } from './modules/contact/contact-routing.module';
+import { InvoiceModule } from './modules/invoice/invoice.module';
+import { InvoiceRoutingModule } from './modules/invoice/invoice-routing.module';
 
 
 @NgModule({
@@ -21,7 +24,7 @@ import { DocumentModule } from './modules/document/document.module';
     AppComponent,
     LoginComponent,
     SidebarComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,13 @@ import { DocumentModule } from './modules/document/document.module';
     DocumentRoutingModule,
     DocumentModule,
     MatIconModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ContactModule,
+    ContactRoutingModule,
+    InvoiceModule,
+    InvoiceRoutingModule
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]

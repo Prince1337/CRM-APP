@@ -1,37 +1,40 @@
-<h2>Document List</h2>
-<button (click)="goToDocumentCreate()">Create Document</button>
-<button (click)="goToReports()">Show Reports</button>
-<button (click)="goToSearch()">Search Products</button>
-
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Art</th>
-      <th>Kontakt ID</th>
-      <th>Speicherdatum</th>
-      <th>Dateityp</th>
-      <th>Dateigröße</th>
-      <th>Pfad</th>
-      <th>Notizen</th>
-      <th>Erstellt Datum</th>
-      <th>Geändert Datum</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let document of documents">
-      <td>{{ document.id }}</td>
-      <td>{{ document.art }}</td>
-      <td>{{ document.kontaktId }}</td>
-      <td>{{ document.speicherdatum | date }}</td>
-      <td>{{ document.dateityp }}</td>
-      <td>{{ document.dateigroesse }}</td>
-      <td>{{ document.pfad }}</td>
-      <td>{{ document.notizen }}</td>
-      <td>{{ document.erstelltDatum | date }}</td>
-      <td>{{ document.geaendertDatum | date }}</td>
-    </tr>
-  </tbody>
-</table>
-
-<button (click)="loadDocuments()">Load Documents</button>
+<div class="product-list">
+  <h2>Document List</h2>
+  <button (click)="goToDocumentCreate()">Create Document</button>
+  <button (click)="goToReports()">Show Reports</button>
+  <button (click)="goToSearch()">Search Documents</button>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Art</th>
+        <th>Kontakt ID</th>
+        <th>Speicherdatum</th>
+        <th>Dateityp</th>
+        <th>Dateigröße</th>
+        <th>Pfad</th>
+        <th>Notizen</th>
+        <th>Erstellt Datum</th>
+        <th>Geändert Datum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [routerLink]="['/documents/details', document.id]" *ngFor="let document of documents">
+        <td>{{ document.id }}</td>
+        <td>{{ document.art }}</td>
+        <td>{{ document.kontaktId }}</td>
+        <td>{{ document.speicherdatum | date }}</td>
+        <td>{{ document.dateityp }}</td>
+        <td>{{ document.dateigroesse }}</td>
+        <td>{{ document.pfad }}</td>
+        <td>{{ document.notizen }}</td>
+        <td>{{ document.erstelltDatum | date }}</td>
+        <td>{{ document.geaendertDatum | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button (click)="loadDocuments()">Load Documents</button>
+  
+</div>

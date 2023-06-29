@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentRequest } from 'src/app/shared/models/document-request';
 import { DocumentResponse } from 'src/app/shared/models/document-response';
 import { DocumentService } from '../../document.service';
@@ -14,7 +14,8 @@ export class DocumentEditComponent implements OnInit {
 
   constructor(
     private documentService: DocumentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class DocumentEditComponent implements OnInit {
   getDocument(id: number) {
     this.documentService.getDocument(id)
       .subscribe(document => {
+        console.log(document);
         this.document = document;
       });
   }
@@ -44,6 +46,8 @@ export class DocumentEditComponent implements OnInit {
 
     this.documentService.updateDocument(this.document.id, request)
       .subscribe(response => {
+        alert('Document updated successfully');
+        this.router.navigate(['/documents']);
         // Handle successful update (e.g., show success message, navigate to details page)
       });
   }

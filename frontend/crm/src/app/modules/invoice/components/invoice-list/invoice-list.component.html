@@ -1,0 +1,43 @@
+<h1>Invoice List</h1>
+<button (click)="goToCreate()">Create Invoice</button>
+<button (click)="goToReports()">Show Reports</button>
+<button (click)="goToSearch()">Search</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Invoice Number</th>
+      <th>Contact ID</th>
+      <th>Invoice Date</th>
+      <th>Total Amount</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Payment Due Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr [routerLink]="['/invoices/details', invoice.rechnungsnummer]" *ngFor="let invoice of invoices">
+      <td>{{ invoice.rechnungsnummer }}</td>
+      <td>{{ invoice.kontaktId }}</td>
+      <td>{{ invoice.rechnungsdatum | date }}</td>
+      <td>{{ invoice.bruttobetrag }}</td>
+      <td>{{ invoice.leistungsbezeichnung }}</td>
+      <td>{{ invoice.status }}</td>
+      <td>{{ invoice.zahlungsfrist | date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<nav *ngIf="totalElements > pageSize" aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{ 'disabled': currentPage === 0 }">
+      <a class="page-link" href="#" (click)="onPageChange(currentPage)">Previous</a>
+    </li>
+    <li class="page-item" *ngFor="let page of getPaginationArray()" [ngClass]="{ 'active': currentPage === page }">
+      <a class="page-link" href="#" (click)="onPageChange(page)">{{ page + 1 }}</a>
+    </li>
+    <li class="page-item" [ngClass]="{ 'disabled': currentPage === totalPages - 1 }">
+      <a class="page-link" href="#" (click)="onPageChange(currentPage + 2)">Next</a>
+    </li>
+  </ul>
+</nav>

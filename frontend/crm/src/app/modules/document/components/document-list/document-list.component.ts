@@ -33,10 +33,10 @@ export class DocumentListComponent implements OnInit {
   }
 
   goToReports(): void {
-    this.router.navigate(['/reports']);
+    this.router.navigate(['/documents/reports']);
   }
 
   goToSearch(): void {
-    this.router.navigate(['/search']);
+    this.router.navigate(['/documents/search']);
   }
 }

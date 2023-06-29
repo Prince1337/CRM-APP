@@ -9,6 +9,7 @@ import { DocumentService } from "./document.service";
 import { DocumentDetailsComponent } from './components/document-details/document-details.component';
 import { DocumentEditComponent } from './components/document-edit/document-edit.component';
 import { DocumentCreateComponent } from './components/document-create/document-create.component';
+import { DocumentSearchComponent } from './components/document-search/document-search.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { DocumentCreateComponent } from './components/document-create/document-c
     DocumentDetailsComponent,
     DocumentEditComponent,
     DocumentCreateComponent,
+    DocumentSearchComponent,
   ],
   imports: [
     CommonModule,

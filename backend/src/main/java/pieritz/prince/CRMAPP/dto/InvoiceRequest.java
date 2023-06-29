@@ -22,9 +22,6 @@ public class InvoiceRequest {
     @Past
     private Date rechnungsdatum;
 
-    @Min(0)
-    private double bruttobetrag;
-
     @NotBlank
     @Size(max = 100)
     private String leistungsbezeichnung;

@@ -42,7 +42,7 @@ public class Invoice {
     @Temporal(TemporalType.DATE)
     private Date zahlungsfrist;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.REFRESH}, orphanRemoval = true)
     @JoinColumn(name = "rechnungsnummer")
     private List<Product> produkte;
 

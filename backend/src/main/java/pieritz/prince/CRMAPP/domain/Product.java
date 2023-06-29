@@ -37,6 +37,7 @@ public class Product {
     @Column(name = "notizen", length = 200)
     private String notizen;
 
+
     // Getter und Setter
 }
 
