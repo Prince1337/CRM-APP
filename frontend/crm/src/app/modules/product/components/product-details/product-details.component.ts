@@ -37,4 +37,17 @@ export class ProductDetailsComponent implements OnInit {
   goToEdit() {
     this.router.navigate(['/products/edit', this.product.id]);
   }
+
+  deleteProduct() {
+    this.productService.deleteProduct(this.product.id)
+      .subscribe(
+        () => {
+          this.router.navigate(['/products']);
+          alert('Produkt erfolgreich gelöscht.');
+        },
+        error => {
+          console.log('Fehler beim Löschen der Produktdetails:', error);
+        }
+      );
+  }
 }

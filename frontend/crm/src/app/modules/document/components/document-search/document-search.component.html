@@ -1,0 +1,45 @@
+<div class="search-form">
+    <div class="form-group">
+      <label for="contactId">Contact ID:</label>
+      <input type="number" id="contactId" [(ngModel)]="contactId" name="contactId">
+    </div>
+  
+    <div class="form-group">
+      <label for="fileType">File Type:</label>
+      <input type="text" id="fileType" [(ngModel)]="fileType" name="fileType">
+    </div>
+  
+    <button (click)="searchDocuments()">Search</button>
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Art</th>
+        <th>Kontakt ID</th>
+        <th>Speicherdatum</th>
+        <th>Dateityp</th>
+        <th>Dateigröße</th>
+        <th>Pfad</th>
+        <th>Notizen</th>
+        <th>Erstellt Datum</th>
+        <th>Geändert Datum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let document of documents">
+        <td>{{ document.id }}</td>
+        <td>{{ document.art }}</td>
+        <td>{{ document.kontaktId }}</td>
+        <td>{{ document.speicherdatum | date }}</td>
+        <td>{{ document.dateityp }}</td>
+        <td>{{ document.dateigroesse }}</td>
+        <td>{{ document.pfad }}</td>
+        <td>{{ document.notizen }}</td>
+        <td>{{ document.erstelltDatum | date }}</td>
+        <td>{{ document.geaendertDatum | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

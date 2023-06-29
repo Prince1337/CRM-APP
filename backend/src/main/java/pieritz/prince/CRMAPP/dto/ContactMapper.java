@@ -3,6 +3,8 @@ package pieritz.prince.CRMAPP.dto;
 import org.springframework.stereotype.Component;
 import pieritz.prince.CRMAPP.domain.Contact;
 
+import java.util.Date;
+
 @Component
 public class ContactMapper {
 
@@ -12,11 +14,10 @@ public class ContactMapper {
                 .name(request.getName())
                 .firma(request.getFirma())
                 .email(request.getEmail())
-                .ort(request.getOrt())
-                .gespeichertDatum(request.getGespeichertDatum())
                 .strasse(request.getStrasse())
                 .plz(request.getPlz())
                 .stadt(request.getStadt())
+                .gespeichertDatum(new Date())
                 .branche(request.getBranche())
                 .anrede(request.getAnrede())
                 .position(request.getPosition())
@@ -57,8 +58,6 @@ public class ContactMapper {
         contact.setName(request.getName());
         contact.setFirma(request.getFirma());
         contact.setEmail(request.getEmail());
-        contact.setOrt(request.getOrt());
-        contact.setGespeichertDatum(request.getGespeichertDatum());
         contact.setStrasse(request.getStrasse());
         contact.setPlz(request.getPlz());
         contact.setStadt(request.getStadt());

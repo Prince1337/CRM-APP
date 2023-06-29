@@ -1,0 +1,47 @@
+<h2>Create Invoice</h2>
+
+<form [formGroup]="invoiceForm" (ngSubmit)="createInvoice()">
+  <div class="form-group">
+    <label for="kontaktId">Kontakt:</label>
+    <select class="form-control" id="kontaktId" formControlName="kontaktId">
+      <option value="" disabled selected>Select Contact</option>
+      <option *ngFor="let contact of contacts" [value]="contact.id">{{ contact.vorname + ' ' + contact.name }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="rechnungsdatum">Invoice Date:</label>
+    <input type="date" id="rechnungsdatum" formControlName="rechnungsdatum" required>
+  </div>
+  <div>
+    <label for="bruttobetrag">Total Amount:</label>
+    <input type="number" id="bruttobetrag" formControlName="bruttobetrag">
+  </div>
+  <div>
+    <label for="leistungsbezeichnung">Description:</label>
+    <input type="text" id="leistungsbezeichnung" formControlName="leistungsbezeichnung" required>
+  </div>
+  <div>
+    <label for="status">Status:</label>
+    <input type="text" id="status" formControlName="status" required>
+  </div>
+  <div>
+    <label for="zahlungsfrist">Payment Deadline:</label>
+    <input type="date" id="zahlungsfrist" formControlName="zahlungsfrist" required>
+  </div>
+
+  <h3>Select Products</h3>
+  <div *ngFor="let product of availableProducts">
+    <input type="checkbox" [value]="product.id" (change)="addProduct(product.id)">
+    {{ product.bezeichnung }}
+  </div>
+
+  <h4>Selected Products:</h4>
+  <ul>
+    <li *ngFor="let product of selectedProducts; let i = index">
+      {{ product.bezeichnung }}
+      <button type="button" (click)="removeProduct(i)">Remove</button>
+    </li>
+  </ul>
+
+  <button type="submit">Create Invoice</button>
+</form>

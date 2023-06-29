@@ -1,0 +1,24 @@
+<div *ngIf="contact">
+    <h2>Contact Details</h2>
+    <p><strong>ID:</strong> {{ contact.id }}</p>
+    <p><strong>Vorname:</strong> {{ contact.vorname }}</p>
+    <p><strong>Name:</strong> {{ contact.name }}</p>
+    <p><strong>Firma:</strong> {{ contact.firma }}</p>
+    <p><strong>Stadt:</strong> {{ contact.stadt }}</p>
+    <p><strong>Gespeichert Datum:</strong> {{ contact.gespeichertDatum | date }}</p>
+    <p><strong>Straße:</strong> {{ contact.strasse }}</p>
+    <p><strong>PLZ:</strong> {{ contact.plz }}</p>
+    <p><strong>Branche:</strong> {{ contact.branche }}</p>
+    <p><strong>Anrede:</strong> {{ contact.anrede }}</p>
+    <p><strong>Position:</strong> {{ contact.position }}</p>
+    <p><strong>Webseite:</strong> {{ contact.webseite }}</p>
+    <p><strong>Geburtsdatum:</strong> {{ contact.geburtsdatum | date }}</p>
+    <p><strong>Kategorie:</strong> {{ contact.kategorie }}</p>
+    <p><strong>Notizen:</strong> {{ contact.notizen }}</p>
+  
+    <!-- Add more contact details as needed -->
+  
+    <button (click)="editContact()">Edit</button>
+    <button (click)="deleteContact()">Delete</button>
+  </div>
+  

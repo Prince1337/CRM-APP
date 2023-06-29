@@ -1,0 +1,81 @@
+<div>
+  <h2>Create Contact</h2>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="vorname">Vorname:</label>
+      <input type="text" id="vorname" formControlName="vorname" required>
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" required>
+    </div>
+    <div class="form-group">
+      <label for="firma">Firma:</label>
+      <input type="text" id="firma" formControlName="firma">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" required>
+      <div *ngIf="contactForm.controls['email'].invalid && contactForm.controls['email'].touched" class="error">
+        Email is required and must be a valid email address.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="strasse">Straße:</label>
+      <input type="text" id="strasse" formControlName="strasse" required>
+    </div>
+    <div class="form-group">
+      <label for="plz">PLZ:</label>
+      <input type="text" id="plz" formControlName="plz" required>
+    </div>
+    <div class="form-group">
+      <label for="stadt">Stadt:</label>
+      <input type="text" id="stadt" formControlName="stadt" required>
+    </div>
+    <div class="form-group">
+      <label for="branche">Branche:</label>
+      <input type="text" id="branche" formControlName="branche">
+    </div>
+    <div class="form-group">
+      <label for="anrede">Anrede:</label>
+      <input type="text" id="anrede" formControlName="anrede" required>
+    </div>
+    <div class="form-group">
+      <label for="position">Position:</label>
+      <input type="text" id="position" formControlName="position">
+    </div>
+    <div class="form-group">
+      <label for="webseite">Webseite:</label>
+      <input type="text" id="webseite" formControlName="webseite">
+    </div>
+    <div class="form-group">
+      <label for="telefon">Telefon:</label>
+      <input type="text" id="telefon" formControlName="telefon">
+    </div>
+    <div class="form-group">
+      <label for="mobil">Mobil:</label>
+      <input type="text" id="mobil" formControlName="mobil">
+    </div>
+    <div class="form-group">
+      <label for="geburtsdatum">Geburtsdatum:</label>
+      <input type="date" id="geburtsdatum" formControlName="geburtsdatum">
+    </div>
+    <div class="form-group">
+      <label for="bic">BIC:</label>
+      <input type="text" id="bic" formControlName="bic">
+    </div>
+    <div class="form-group">
+      <label for="iban">IBAN:</label>
+      <input type="text" id="iban" formControlName="iban" required>
+    </div>
+    <div class="form-group">
+      <label for="kategorie">Kategorie:</label>
+      <input type="text" id="kategorie" formControlName="kategorie">
+    </div>
+    <div class="form-group">
+      <label for="notizen">Notizen:</label>
+      <textarea id="notizen" formControlName="notizen"></textarea>
+    </div>
+    <button type="submit" [disabled]="contactForm.invalid">Create</button>
+  </form>
+</div>

@@ -1,0 +1,36 @@
+<h2>Contact Search</h2>
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="searchTerm">Name:</label>
+    <input type="text" class="form-control" id="searchTerm" formControlName="searchTerm">
+  </div>
+  <div class="form-group">
+    <label for="industry">Industry:</label>
+    <input type="text" class="form-control" id="industry" formControlName="industry">
+  </div>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table mt-3" *ngIf="contactsPage">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Company</th>
+      <th>City</th>
+      <th>Creation Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr [routerLink]="['/contacts/details', contact.id]" *ngFor="let contact of contactsPage.content">
+      <td>{{ contact.id }}</td>
+      <td>{{ contact.vorname }}</td>
+      <td>{{ contact.name }}</td>
+      <td>{{ contact.firma }}</td>
+      <td>{{ contact.stadt }}</td>
+      <td>{{ contact.gespeichertDatum | date }}</td>
+    </tr>
+  </tbody>
+</table>

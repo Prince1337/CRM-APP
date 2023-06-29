@@ -1,0 +1,95 @@
+<h1>Edit Contact</h1>
+
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="vorname">Vorname:</label>
+    <input type="text" id="vorname" formControlName="vorname" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="firma">Firma:</label>
+    <input type="text" id="firma" formControlName="firma" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="strasse">Straße:</label>
+    <input type="text" id="strasse" formControlName="strasse" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="plz">PLZ:</label>
+    <input type="text" id="plz" formControlName="plz" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="stadt">Stadt:</label>
+    <input type="text" id="stadt" formControlName="stadt" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="branche">Branche:</label>
+    <input type="text" id="branche" formControlName="branche" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="anrede">Anrede:</label>
+    <input type="text" id="anrede" formControlName="anrede" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="position">Position:</label>
+    <input type="text" id="position" formControlName="position" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="webseite">Webseite:</label>
+    <input type="text" id="webseite" formControlName="webseite" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="telefon">Telefon:</label>
+    <input type="text" id="telefon" formControlName="telefon" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="mobil">Mobil:</label>
+    <input type="text" id="mobil" formControlName="mobil" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="geburtsdatum">Geburtsdatum:</label>
+    <input type="date" id="geburtsdatum" formControlName="geburtsdatum" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="bic">BIC:</label>
+    <input type="text" id="bic" formControlName="bic" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="iban">IBAN:</label>
+    <input type="text" id="iban" formControlName="iban" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="kategorie">Kategorie:</label>
+    <input type="text" id="kategorie" formControlName="kategorie" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="notizen">Notizen:</label>
+    <textarea id="notizen" formControlName="notizen" class="form-control"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -3,11 +3,10 @@ export class ContactResponse {
     vorname!: string;
     name!: string;
     firma!: string;
-    ort!: string;
+    stadt!: string;
     gespeichertDatum!: Date;
     strasse!: string;
     plz!: string;
-    stadt!: string;
     branche!: string;
     anrede!: string;
     position!: string;

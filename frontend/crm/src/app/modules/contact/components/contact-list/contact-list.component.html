@@ -1,0 +1,51 @@
+<div class="product-list">
+  <h2>Contact List</h2>
+  <button (click)="goToContactCreate()">Create Contact</button>
+  <button (click)="goToReports()">Show Reports</button>
+  <button (click)="goToSearch()">Search Contacts</button>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Vorname</th>
+        <th>Name</th>
+        <th>Firma</th>
+        <th>Ort</th>
+        <!-- Add more table headers for other contact properties -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr [routerLink]="['/contacts/details', contact.id]" *ngFor="let contact of contactsPage?.content">
+        <td>{{ contact.id }}</td>
+        <td>{{ contact.vorname }}</td>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.firma }}</td>
+        <td>{{ contact.stadt }}</td>
+        <!-- Display other contact properties as needed -->
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="contactsPage">
+    <button [disabled]="contactsPage.first" (click)="onPageChange(0)">
+      First
+    </button>
+    <button
+      [disabled]="contactsPage.first"
+      (click)="onPageChange(contactsPage.number - 1)"
+    >
+      Previous
+    </button>
+    <button
+      [disabled]="contactsPage.last"
+      (click)="onPageChange(contactsPage.number + 1)"
+    >
+      Next
+    </button>
+    <button
+      [disabled]="contactsPage.last"
+      (click)="onPageChange(contactsPage.totalPages - 1)"
+    >
+      Last
+    </button>
+  </div>
+</div>

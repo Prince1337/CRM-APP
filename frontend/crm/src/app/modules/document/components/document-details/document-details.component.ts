@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentResponse } from 'src/app/shared/models/document-response';
 import { DocumentService } from '../../document.service';
 
@@ -13,7 +13,8 @@ export class DocumentDetailsComponent implements OnInit {
 
   constructor(
     private documentService: DocumentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -26,5 +27,9 @@ export class DocumentDetailsComponent implements OnInit {
       .subscribe(document => {
         this.document = document;
       });
+  }
+
+  goToEdit(){
+    this.router.navigate(['/documents/edit', this.document.id]);
   }
 }

@@ -46,7 +46,6 @@ public class ContactServiceImplementation implements ContactService {
     }
 
     @Override
-    @Cacheable(value = "contacts")
     public Page<ContactResponse> getAllContacts(Pageable pageable) {
         log.info("ContactService:getAllContacts execution started");
         Page<Contact> contactPage = contactRepository.findAll(pageable);
